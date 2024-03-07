@@ -1,0 +1,24 @@
+# replace DASHBOARD_URL with the hostname you want for your dashboard
+# the hostname should be setup to point to your ingress controller
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  annotations:
+    cert-manager.io/cluster-issuer: letsencrypt-staging
+  name: tekton-dashboard
+  namespace: tekton-pipelines
+spec:
+  rules:
+  - host: tekton-dashboard.192-168-100-200.year.date
+    http:
+      paths:
+      - pathType: ImplementationSpecific
+        backend:
+          service:
+            name: tekton-dashboard
+            port:
+              number: 9097
+  tls:
+  - hosts:
+    - tekton-dashboard.192-168-100-200.year.date
+    secretName: tekton-dashboard-tls
