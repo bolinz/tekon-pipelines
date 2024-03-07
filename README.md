@@ -1,2 +1,2 @@
-# Tekton-pipelins
+# Tekton-pipelines
 
